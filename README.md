@@ -61,9 +61,9 @@ The example workflow in `.github/workflows/agent-assurance.yml` runs manually an
 
 ## Roadmap
 
-1. Add signed approval evidence and manifest versioning.
+1. Add manifest versioning and policy-aware compatibility rules.
 2. Integrate AgentReplay session evidence.
-3. Publish a GitHub Action and a reproducible security benchmark.
+3. Expand the reproducible security benchmark.
 
 ## Synthetic fixtures
 

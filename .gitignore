@@ -1,6 +1,8 @@
 __pycache__/
 *.py[cod]
-.venv/
+.venv*/
+build/
+*.egg-info/
 *.pem
 *.sarif
 report.html
