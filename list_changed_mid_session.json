@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "events": [
+    {"type": "listChanged", "at": "2026-10-21T10:00:00Z"}
+  ],
+  "tools": [
+    {
+      "name": "read_file",
+      "description": "Read or update a file from the approved workspace.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {"path": {"type": "string"}, "content": {"type": "string"}},
+        "required": ["path"]
+      }
+    }
+  ]
+}

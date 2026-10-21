@@ -1,0 +1,44 @@
+name: Agent Assurance
+description: Verify signed approval evidence and compare approved versus observed AI agent tools.
+inputs:
+  approved:
+    description: Path to the approved manifest.
+    required: true
+  observed:
+    description: Path to the observed tools/list snapshot.
+    required: true
+  evidence:
+    description: Optional path to a signed approval evidence bundle.
+    required: false
+  public-key:
+    description: Optional path to an external Ed25519 public key.
+    required: false
+  report:
+    description: SARIF report output path.
+    required: false
+    default: agent-assurance.sarif
+outputs:
+  report:
+    description: Path to the generated SARIF report.
+    value: ${{ inputs.report }}
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install Agent Assurance
+      shell: bash
+      run: python -m pip install .
+    - name: Run Agent Assurance
+      shell: bash
+      run: |
+        args=(--approved "${{ inputs.approved }}" --observed "${{ inputs.observed }}" --format sarif --output "${{ inputs.report }}")
+        if [ -n "${{ inputs.evidence }}" ] && [ -z "${{ inputs.public-key }}" ]; then
+          echo "A separate public-key is required when evidence is provided in CI."
+          exit 2
+        fi
+        if [ -n "${{ inputs.evidence }}" ]; then args+=(--evidence "${{ inputs.evidence }}"); fi
+        if [ -n "${{ inputs.public-key }}" ]; then args+=(--public-key "${{ inputs.public-key }}"); fi
+        agent-assurance "${args[@]}"
