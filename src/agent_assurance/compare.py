@@ -57,58 +57,40 @@ def _tool_map(document: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 
 def compare_documents(approved: dict[str, Any], observed: dict[str, Any]) -> dict[str, Any]:
+    approved_version = approved.get("version", 1)
+    observed_version = observed.get("version", 1)
+    if not isinstance(approved_version, int) or not isinstance(observed_version, int):
+        raise ValueError("Manifest version must be an integer")
     approved_tools = _tool_map(approved)
     observed_tools = _tool_map(observed)
     changes: list[ToolChange] = []
 
     for name in sorted(approved_tools.keys() - observed_tools.keys()):
-        changes.append(
-            ToolChange(
-                change_type="removed",
-                name=name,
-                approved_fingerprint=fingerprint_tool(approved_tools[name]),
-            )
-        )
+        changes.append(ToolChange(change_type="removed", name=name, approved_fingerprint=fingerprint_tool(approved_tools[name])))
 
     for name in sorted(observed_tools.keys() - approved_tools.keys()):
-        changes.append(
-            ToolChange(
-                change_type="added",
-                name=name,
-                observed_fingerprint=fingerprint_tool(observed_tools[name]),
-            )
-        )
+        changes.append(ToolChange(change_type="added", name=name, observed_fingerprint=fingerprint_tool(observed_tools[name])))
 
     for name in sorted(approved_tools.keys() & observed_tools.keys()):
         approved_tool = approved_tools[name]
         observed_tool = observed_tools[name]
         approved_fingerprint = fingerprint_tool(approved_tool)
         observed_fingerprint = fingerprint_tool(observed_tool)
-        changed_fields = tuple(
-            field
-            for field in ("description", "inputSchema")
-            if approved_tool.get(field) != observed_tool.get(field)
-        )
+        changed_fields = tuple(field for field in ("description", "inputSchema") if approved_tool.get(field) != observed_tool.get(field))
         if approved_fingerprint != observed_fingerprint:
-            changes.append(
-                ToolChange(
-                    change_type="modified",
-                    name=name,
-                    approved_fingerprint=approved_fingerprint,
-                    observed_fingerprint=observed_fingerprint,
-                    changed_fields=changed_fields,
-                )
-            )
+            changes.append(ToolChange(change_type="modified", name=name, approved_fingerprint=approved_fingerprint, observed_fingerprint=observed_fingerprint, changed_fields=changed_fields))
+
+    if approved_version != observed_version:
+        changes.append(ToolChange(change_type="manifestVersionChanged", name="$manifest", approved_fingerprint=str(approved_version), observed_fingerprint=str(observed_version), changed_fields=("version",)))
 
     signals = []
     events = observed.get("events", [])
-    if isinstance(events, list) and any(
-        isinstance(event, dict) and event.get("type") == "listChanged" for event in events
-    ):
+    if isinstance(events, list) and any(isinstance(event, dict) and event.get("type") == "listChanged" for event in events):
         signals.append("listChanged")
 
     return {
         "status": "pass" if not changes else "fail",
+        "manifestVersion": {"approved": approved_version, "observed": observed_version},
         "approvedToolCount": len(approved_tools),
         "observedToolCount": len(observed_tools),
         "signals": signals,
