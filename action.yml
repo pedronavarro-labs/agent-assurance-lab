@@ -13,6 +13,12 @@ inputs:
   public-key:
     description: Optional path to an external Ed25519 public key.
     required: false
+  policy:
+    description: Optional YAML policy file.
+    required: false
+  session:
+    description: Optional session evidence JSON file.
+    required: false
   report:
     description: SARIF report output path.
     required: false
@@ -41,4 +47,6 @@ runs:
         fi
         if [ -n "${{ inputs.evidence }}" ]; then args+=(--evidence "${{ inputs.evidence }}"); fi
         if [ -n "${{ inputs.public-key }}" ]; then args+=(--public-key "${{ inputs.public-key }}"); fi
+        if [ -n "${{ inputs.policy }}" ]; then args+=(--policy "${{ inputs.policy }}"); fi
+        if [ -n "${{ inputs.session }}" ]; then args+=(--session "${{ inputs.session }}"); fi
         agent-assurance "${args[@]}"
