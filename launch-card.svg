@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 628" role="img" aria-labelledby="title desc">
+  <title id="title">Boundary Signal launch card</title>
+  <desc id="desc">Boundary Signal verifies AI agent tool boundaries with fingerprints, policy and runtime evidence.</desc>
+  <rect width="1200" height="628" rx="28" fill="#101010"/>
+  <path d="M1040 52 1110 81v45c0 45-29 73-70 90-41-17-70-45-70-90V81Z" fill="#101010" stroke="#f3f0ec" stroke-width="8"/>
+  <path d="M981 130h29l13-22 12 40 16-54 14 36h28" fill="none" stroke="#e11d2e" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+  <circle cx="1074" cy="130" r="13" fill="#e11d2e" stroke="#f3f0ec" stroke-width="6"/>
+  <path d="m1068 130 5 5 10-12" fill="none" stroke="#101010" stroke-width="5"/>
+  <text x="76" y="112" fill="#e11d2e" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="5">BOUNDARY SIGNAL</text>
+  <text x="76" y="205" fill="#f3f0ec" font-family="Arial, sans-serif" font-size="58" font-weight="700">Verifiable boundaries</text>
+  <text x="76" y="275" fill="#f3f0ec" font-family="Arial, sans-serif" font-size="58" font-weight="700">for AI agents.</text>
+  <text x="80" y="350" fill="#c9c2bc" font-family="Arial, sans-serif" font-size="25">Fingerprints · policy · runtime evidence · CI decisions</text>
+  <g transform="translate(76 416)">
+    <rect width="235" height="92" rx="14" fill="#1c1c1c" stroke="#f3f0ec"/>
+    <text x="24" y="38" fill="#e11d2e" font-family="Arial, sans-serif" font-size="18" font-weight="700">APPROVED</text>
+    <text x="24" y="68" fill="#f3f0ec" font-family="Arial, sans-serif" font-size="20">tool surface</text>
+    <text x="265" y="57" fill="#e11d2e" font-family="Arial, sans-serif" font-size="34">→</text>
+    <rect x="320" width="235" height="92" rx="14" fill="#35171a" stroke="#e11d2e"/>
+    <text x="344" y="38" fill="#ff6b73" font-family="Arial, sans-serif" font-size="18" font-weight="700">DRIFT</text>
+    <text x="344" y="68" fill="#f3f0ec" font-family="Arial, sans-serif" font-size="20">detected</text>
+    <text x="585" y="57" fill="#e11d2e" font-family="Arial, sans-serif" font-size="34">→</text>
+    <rect x="640" width="235" height="92" rx="14" fill="#211516" stroke="#e11d2e"/>
+    <text x="664" y="38" fill="#ff6b73" font-family="Arial, sans-serif" font-size="18" font-weight="700">CI</text>
+    <text x="664" y="68" fill="#f3f0ec" font-family="Arial, sans-serif" font-size="20">BLOCK</text>
+  </g>
+</svg>
