@@ -1,0 +1,14 @@
+version: 1
+rules:
+  block_added_tools: true
+  block_removed_tools: false
+  fail_on_list_changed: false
+  blocked_tools:
+    - delete_file
+  read_only_tools:
+    - read_file
+  deny_effects:
+    - write
+    - delete
+    - execute
+    - admin
