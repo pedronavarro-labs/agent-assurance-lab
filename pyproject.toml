@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-assurance-lab"
+version = "0.2.0"
+description = "Deterministic assurance checks for AI agent tool definitions."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["cryptography>=42", "PyYAML>=6"]
+
+[project.scripts]
+agent-assurance = "agent_assurance.cli:main"
+agent-assurance-evidence = "agent_assurance.evidence_cli:main"
+agent-assurance-dashboard = "agent_assurance.dashboard:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
