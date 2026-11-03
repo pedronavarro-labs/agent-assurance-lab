@@ -1,0 +1,3 @@
+{"tools":[{"name":"read_file","description":"Read a file","inputSchema":{"type":"object"},"declaredEffects":["read"]}]}
+{"type":"tool_call","timestamp":"2026-11-03T10:00:04Z","name":"read_file","effects":["read"],"status":"ok"}
+{"type":"tool_call","timestamp":"2026-11-03T10:01:03Z","name":"read_file","effects":["read","write"],"status":"ok"}
